@@ -1,0 +1,26 @@
+= Sat Images
+
+Example service which generates images as required from basic sattelite imagery.
+
+This service has one endpoint: **/generate-image**
+
+It accepts a POST request with a JSON payload, which has the two following parameters:
+
+* utmZone - int 1-60 designating UTM zone
+* latitudeBand - latitude band, single letter
+* gridSquare - grid square, 2 letters
+* date - the date to search for in ISO format(YYYY-MM-DD), just day 
+* channelMap - select output image with string enums:
+	** VISIBLE 
+	** VEGETATION
+	** WATER_VAPOR
+
+
+Example API call with output:
+
+.request
+include::{snippets}/home/http-request.adoc[]
+
+.response
+include::{snippets}/home/http-response.adoc[]
+

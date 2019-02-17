@@ -2,6 +2,7 @@ package com.example.satimages.api;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ApiController.class)
+@AutoConfigureRestDocs(outputDir = "target/snippets")
 public class ApiControllerTest {
 
 	Logger logger = LoggerFactory.getLogger(ApiControllerTest.class);
@@ -56,7 +59,8 @@ public class ApiControllerTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(desc)))
 		.andExpect(status().isOk())
-		.andExpect(content().contentTypeCompatibleWith(MediaType.IMAGE_JPEG));
+		.andExpect(content().contentTypeCompatibleWith(MediaType.IMAGE_JPEG))
+		.andDo(document("home"));
 	}
 
 	@Test
@@ -67,7 +71,7 @@ public class ApiControllerTest {
 		desc.setUtmZone(33);
 		desc.setLatitudeBand("U");
 		desc.setGridSquare("UP");
-		desc.setDate(LocalDate.of(2018, 8, 4));
+		desc.setDate(LocalDate.of(2018, 8, 5));
 		desc.setChannelMap(SatImageDescription.ChannelMapping.VISIBLE);
 
 		given(satImageGenerator.getImageStreamByDescription(any()))
