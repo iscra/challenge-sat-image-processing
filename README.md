@@ -11,23 +11,23 @@ Requirements: Java 11, maven (or IDE).
 
 * test
 
-	mvn test
+		mvn test
 
 * build executabe jar suitable for execution and deployment
 
-	mvn package
+		mvn package
 
 * run locally
 
-	mvn spring-boot:runóó
+		mvn spring-boot:run
 
 * or using built jar
 
-	java -Dimage.dir=data -jar target/sat-images-0.0.1-SNAPSHOT.jar
+		java -Dimage.dir=data -jar target/sat-images-0.0.1-SNAPSHOT.jar
 
 * API documentation can be generated using
 
-	mvn package
+		mvn package
 
 It is then found in the target/generated-docs directory in HTML format.
 
